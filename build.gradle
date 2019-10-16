@@ -1,0 +1,80 @@
+plugins {
+    id 'idea'
+}
+
+group 'com.soup.memo'
+version '1.0'
+
+allprojects {
+    //修改项目属性(可选)
+    group 'com.soup.memo'
+}
+
+// 配置所有子模块
+subprojects {
+
+    version '1.0'
+
+    //应用插件
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    // JVM 版本号要求
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // java编译的时候缺省状态下会因为中文字符而失败
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+    // 定义仓库
+    repositories {
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven{url 'https://mvnrepository.com/'}
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        compile(
+                "org.apache.logging.log4j:log4j-api:2.11.2",
+                "org.apache.logging.log4j:log4j-core:2.11.2",
+                "org.apache.logging.log4j:log4j-web:2.11.2",
+                "org.apache.logging.log4j:log4j-slf4j-impl:2.11.2",
+                "org.apache.logging.log4j:log4j-jcl:2.11.2",
+                "org.projectlombok:lombok:1.18.10",
+                "com.google.guava:guava:27.1-jre",
+        )
+        testCompile("junit:junit:4.12")
+    }
+
+    //指定目录结构
+    sourceSets {
+        main {
+            java{
+                srcDir 'src/main/java'
+            }
+            resources {
+                srcDir 'src/main/java'
+                srcDir 'src/main/resources'
+            }
+        }
+    }
+    // 关掉bootRepackage任务
+    // bootRepackage.enabled=false
+
+    //定义版本号
+    ext {
+        springVersion = '4.3.3.RELEASE'
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    // 显示当前项目下所有用于 compile 的 jar, 命令：gradle listJars
+    /*task listJars(description: 'Display all compile jars.') << {
+        configurations.compile.each { File file -> println file.name }
+    }*/
+}
+
