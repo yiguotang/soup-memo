@@ -28,21 +28,24 @@ subprojects {
 
     // 定义仓库
     repositories {
-        maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
-        maven{url 'https://mvnrepository.com/'}
         mavenLocal()
         jcenter()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://mvnrepository.com/' }
         mavenCentral()
     }
 
     dependencies {
         compile(
+                // log4j2
                 "org.apache.logging.log4j:log4j-api:2.11.2",
                 "org.apache.logging.log4j:log4j-core:2.11.2",
                 "org.apache.logging.log4j:log4j-web:2.11.2",
                 "org.apache.logging.log4j:log4j-slf4j-impl:2.11.2",
                 "org.apache.logging.log4j:log4j-jcl:2.11.2",
+                // lombok
                 "org.projectlombok:lombok:1.18.10",
+                // guava
                 "com.google.guava:guava:27.1-jre",
         )
         testCompile("junit:junit:4.12")
@@ -65,7 +68,7 @@ subprojects {
 
     //定义版本号
     ext {
-        springVersion = '4.3.3.RELEASE'
+        
     }
 
     tasks.withType(JavaCompile) {
