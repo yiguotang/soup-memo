@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.soup.memo'
+version '1.0'
+description = "tomcat8 demo"
+archivesBaseName = "tomcat8"
+
+dependencies {
+    compile(
+            "org.apache.tomcat.embed:tomcat-embed-core:8.5.38",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:8.5.38",
+            "org.apache.tomcat:tomcat-jasper:8.5.38",
+            "org.apache.tomcat:tomcat-jasper-el:8.5.38",
+            "org.apache.tomcat:tomcat-jsp-api:8.5.38"
+    )
+}
