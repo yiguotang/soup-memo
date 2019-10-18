@@ -1,4 +1,5 @@
 rootProject.name = 'soup-memo'
 include 'netty'
 include 'tomcat'
+include 'common'
 
