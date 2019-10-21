@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.soup.memo'
+version '1.0'
+
+description = "java jvm"
+archivesBaseName = "java jvm"
+
+dependencies {
+    compile(
+            "cglib:cglib:3.3.0",
+    )
+}
