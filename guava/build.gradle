@@ -10,5 +10,5 @@ description = "guava"
 archivesBaseName = "guava"
 
 dependencies {
-    compile()
+    
 }
