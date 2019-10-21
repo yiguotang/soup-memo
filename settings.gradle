@@ -2,4 +2,5 @@ rootProject.name = 'soup-memo'
 include 'netty'
 include 'tomcat'
 include 'common'
+include 'design-pattern'
 
