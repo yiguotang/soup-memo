@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.soup.memo'
+version '1.0'
+
+description = "thread"
+archivesBaseName = "thread"
+
+dependencies {
+
+}
