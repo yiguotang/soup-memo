@@ -16,9 +16,10 @@ public class PrivateConstructor {
      * 私有构造可以通过反射方式来构建，需要在构造方法里进行处理，当创建第二个实例对象，抛出异常
      */
     private PrivateConstructor() {
-        if (!this.equals(INSTANCE)) {
+        if (null != INSTANCE && !this.equals(INSTANCE)) {
             // throw new IllegalAccessException("");
             log.error("IllegalAccess");
+            throw new AssertionError("不可以使用外部调用私有方法构建实例");
         }
     }
 

@@ -16,13 +16,14 @@ public class PrivateConstructorReflectionTest {
 
     @Test
     public void invokePrivateConstructor() throws Exception {
+        log.info("{}", PrivateConstructor.INSTANCE);
+
         Class<PrivateConstructor> elvisClass = PrivateConstructor.class;
 
         Constructor<PrivateConstructor> privateConstructor = elvisClass.getDeclaredConstructor();
         privateConstructor.setAccessible(true);
         PrivateConstructor elvis = privateConstructor.newInstance();
 
-        log.info("{}", PrivateConstructor.INSTANCE);
         log.info("{}",elvis);
         Assert.assertNotSame(PrivateConstructor.INSTANCE, elvis);
     }
