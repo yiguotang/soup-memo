@@ -22,9 +22,16 @@ public class PrivateConstructorReflectionTest {
 
         Constructor<PrivateConstructor> privateConstructor = elvisClass.getDeclaredConstructor();
         privateConstructor.setAccessible(true);
-        PrivateConstructor elvis = privateConstructor.newInstance();
+        PrivateConstructor elvis = null;
+        try {
+            elvis = privateConstructor.newInstance();
+        } catch (Exception e) {
+            Assert.fail();
+        }
+
 
         log.info("{}",elvis);
+        Assert.assertNull(elvis);
         Assert.assertNotSame(PrivateConstructor.INSTANCE, elvis);
     }
 }
