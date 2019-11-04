@@ -32,6 +32,7 @@ public class NioFileChannel {
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
         while (true) {
             /**
+             * 将缓存恢复到初始状态：position=0，limit=capacity
              * 下面一条语句注释后会发生不断写入数据，原因是：
              * 如果注释了话，当buffer的position和limit都读取完数据后，在最后一个索引位置上，
              * int read = inputChannel.read(byteBuffer);
@@ -46,6 +47,9 @@ public class NioFileChannel {
                 break;
             }
 
+            /**
+             * flip()方法的作用是将limit的值设置为position，position设置为0
+             */
             byteBuffer.flip();
 
             outputChannel.write(byteBuffer);

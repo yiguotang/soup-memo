@@ -1,8 +1,6 @@
 package com.soup.memo.nio;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.nio.IntBuffer;
 import java.security.SecureRandom;
@@ -10,6 +8,7 @@ import java.security.SecureRandom;
 /**
  * <p>
  * Description: 初识nio。输出一个随机数字
+ * 通过输出，观察Buffer的3个变量的值：capacity、limit、position
  * </p>
  *
  * @author zhaoyi
@@ -22,6 +21,8 @@ public class NioFirstMetDemo {
     public static void main(String[] args) {
         IntBuffer buffer = IntBuffer.allocate(10);
 
+        log.info("buffer capacity: {}", buffer.capacity());
+
         for (int i = 0; i < 5; i++) {
             int randomNumber = new SecureRandom().nextInt(20);
             buffer.put(randomNumber);
@@ -32,13 +33,14 @@ public class NioFirstMetDemo {
 
         buffer.flip();
 
-        log.info("after buffer.flip() limit val: {}", buffer.limit());
+        log.info("after buffer.flip() limit val: {}\r\n", buffer.limit());
 
         while (buffer.hasRemaining()) {
             log.info("limit: {}", buffer.limit());
             log.info("posiont: {}", buffer.position());
             log.info("capacity: {}", buffer.capacity());
             log.info("buffer.get(): {}", buffer.get());
+            log.info("------------------");
         }
     }
 }
