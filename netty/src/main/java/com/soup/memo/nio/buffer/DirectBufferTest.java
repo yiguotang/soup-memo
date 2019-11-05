@@ -8,7 +8,7 @@ import java.nio.channels.FileChannel;
 
 /**
  * <p>
- * Description:
+ * Description: 零拷贝的实现 {@link java.nio.DirectByteBuffer}
  * </p>
  *
  * @author zhaoyi
@@ -24,6 +24,7 @@ public class DirectBufferTest {
         FileChannel inputChannel = inputStream.getChannel();
         FileChannel outputChannel = outputStream.getChannel();
 
+        // 这里使用DirectBuffer
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(1024);
         while (true) {
             byteBuffer.clear();
