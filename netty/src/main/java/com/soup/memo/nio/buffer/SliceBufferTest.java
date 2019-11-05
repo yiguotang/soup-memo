@@ -4,14 +4,14 @@ import java.nio.ByteBuffer;
 
 /**
  * <p>
- * Description: ByteBuffer的slice方法测试
+ * Description: ByteBuffer的slice测试
  * slice buffer与原有的buffer共享同一份数据
  * </p>
  *
  * @author zhaoyi
  * @date 2019-04-02 20:23
  */
-public class NioByteBufferSliceTest {
+public class SliceBufferTest {
 
     public static void main(String[] args) {
         ByteBuffer byteBuffer = ByteBuffer.allocate(10);

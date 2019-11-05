@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
  * @author zhaoyi
  * @date 2019-04-02 19:50
  */
-public class NioBufferTest {
+public class BufferTest {
 
     public static void main(String[] args) throws Exception {
         ByteBuffer byteBuffer = ByteBuffer.allocate(64);
