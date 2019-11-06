@@ -6,4 +6,8 @@
     <bean id="demoBean" class="com.soup.memo.spring.ch1.DemoBean">
         <property name="message" value="demo message"/>
     </bean>
+
+    <bean id="demoBean2" class="com.soup.memo.spring.ch1.DemoBean">
+        <property name="message" value="demo message2"/>
+    </bean>
 </beans>

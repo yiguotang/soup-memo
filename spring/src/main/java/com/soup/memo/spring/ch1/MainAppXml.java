@@ -15,6 +15,8 @@ public class MainAppXml {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("bean/beans.xml");
         DemoBean obj = (DemoBean) context.getBean("demoBean");
+        DemoBean obj2 = (DemoBean) context.getBean("demoBean2");
         log.info("xml bean message property: {}", obj.getMessage());
+        log.info("xml same bean diff beanId, obj:{}, obj2:{}", obj, obj2);
     }
 }
