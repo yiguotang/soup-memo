@@ -7,7 +7,7 @@ import java.nio.channels.FileChannel;
 
 /**
  * <p>
- * Description:
+ * Description: MappedByteBuffer 是位于对外内存的
  * </p>
  *
  * @author zhaoyi
