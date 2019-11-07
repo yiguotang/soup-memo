@@ -10,7 +10,7 @@ import java.nio.channels.FileChannel;
  * @description nio方式写入文件
  * @date 2019-03-31 22:42
  **/
-public class NioWriteFile {
+public class WriteFile {
 
     public static void main(String[] args) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("nio_write_file");

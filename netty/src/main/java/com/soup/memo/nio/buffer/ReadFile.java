@@ -13,9 +13,9 @@ import java.nio.channels.FileChannel;
  * @description nio方式读取文件
  * @date 2019-03-31 22:34
  **/
-public class NioReadFile {
+public class ReadFile {
 
-    private static final Logger LOGGER = LogManager.getLogger(NioReadFile.class);
+    private static final Logger LOGGER = LogManager.getLogger(ReadFile.class);
 
     public static void main(String[] args) throws IOException {
         FileInputStream fileInputStream = new FileInputStream("build.gradle");

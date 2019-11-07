@@ -8,13 +8,13 @@ import java.nio.channels.FileChannel;
 
 /**
  * <p>
- * Description:
+ * Description: 零拷贝的实现 {@link java.nio.DirectByteBuffer}
  * </p>
  *
  * @author zhaoyi
  * @date 2019-04-02 21:06
  */
-public class NioDirectBufferTest {
+public class DirectBufferTest {
 
     public static void main(String[] args) throws Exception {
         FileInputStream inputStream = new FileInputStream("settings.gradle");
@@ -24,6 +24,7 @@ public class NioDirectBufferTest {
         FileChannel inputChannel = inputStream.getChannel();
         FileChannel outputChannel = outputStream.getChannel();
 
+        // 这里使用DirectBuffer
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(1024);
         while (true) {
             byteBuffer.clear();
