@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 /**
  * <p>
@@ -16,17 +17,17 @@ import java.nio.ByteBuffer;
  * @author zhaoyi
  * @date 2019-04-01 16:10
  */
-public class FileChannel {
+public class FileChannelTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(FileChannel.class);
+    private static final Logger LOGGER = LogManager.getLogger(FileChannelTest.class);
 
     public static void main(String[] args) throws Exception {
         FileInputStream inputStream = new FileInputStream("settings.gradle");
         File targetFile = new File("demo");
         FileOutputStream outputStream = new FileOutputStream(targetFile);
 
-        java.nio.channels.FileChannel inputChannel = inputStream.getChannel();
-        java.nio.channels.FileChannel outputChannel = outputStream.getChannel();
+        FileChannel inputChannel = inputStream.getChannel();
+        FileChannel outputChannel = outputStream.getChannel();
 
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
         while (true) {
