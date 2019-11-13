@@ -38,21 +38,23 @@ subprojects {
     dependencies {
         compile(
                 // log4j2
-                "org.apache.logging.log4j:log4j-api:2.11.2",
-                "org.apache.logging.log4j:log4j-core:2.11.2",
-                "org.apache.logging.log4j:log4j-web:2.11.2",
-                "org.apache.logging.log4j:log4j-slf4j-impl:2.11.2",
-                "org.apache.logging.log4j:log4j-jcl:2.11.2",
+                'org.apache.logging.log4j:log4j-api:2.11.2',
+                'org.apache.logging.log4j:log4j-core:2.11.2',
+                'org.apache.logging.log4j:log4j-web:2.11.2',
+                'org.apache.logging.log4j:log4j-slf4j-impl:2.11.2',
+                'org.apache.logging.log4j:log4j-jcl:2.11.2',
                 // lombok
-                "org.projectlombok:lombok:1.18.10",
+                'org.projectlombok:lombok:1.18.10',
                 // guava
-                "com.google.guava:guava:27.1-jre",
+                'com.google.guava:guava:27.1-jre',
                 // apache-commons
-                "org.apache.commons:commons-lang3:3.9",
+                'org.apache.commons:commons-lang3:3.9',
                 // fastjson
-                "com.alibaba:fastjson:1.2.62",
+                'com.alibaba:fastjson:1.2.62',
+                // other
+                'cn.hutool:hutool-all:5.0.5',
         )
-        testCompile("junit:junit:4.12")
+        testCompile('junit:junit:4.12')
     }
 
     //指定目录结构
