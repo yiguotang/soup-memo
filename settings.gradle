@@ -7,4 +7,5 @@ include 'jvm'
 include 'guava'
 include 'spring'
 include 'thread'
+include 'algorithm'
 

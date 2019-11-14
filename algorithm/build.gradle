@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.soup.memo'
+version '1.0'
+
+description = 'algorithm'
+archivesBaseName = 'algorithm'
+
+dependencies {
+}
