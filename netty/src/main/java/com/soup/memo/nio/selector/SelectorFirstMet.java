@@ -7,6 +7,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.channels.spi.SelectorProvider;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -31,9 +32,9 @@ public class SelectorFirstMet {
 
         Selector selector = Selector.open();
 
-        // 查看SelectorProvider的实例对象类型
-        /*System.out.println(SelectorProvider.provider().getClass());
-        System.out.println(sun.nio.ch.DefaultSelectorProvider.create().getClass());*/
+        // open方法的实现，查看SelectorProvider的实例对象类型
+        System.out.println(SelectorProvider.provider().getClass());
+        System.out.println(sun.nio.ch.DefaultSelectorProvider.create().getClass());
 
         // 实现一个selector监听多个端口
         for (int port : ports) {
