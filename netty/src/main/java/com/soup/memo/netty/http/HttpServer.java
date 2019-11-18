@@ -1,5 +1,7 @@
 package com.soup.memo.netty.http;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.TimeInterval;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
@@ -23,7 +25,7 @@ public class HttpServer {
      * @param args 参数
      */
     public static void main(String[] args) throws Exception {
-        long start = System.currentTimeMillis();
+        TimeInterval interval = DateUtil.timer();
 
         // 不断从客户端接受连接，但不处理，交给后面的线程组进行处理
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -38,8 +40,7 @@ public class HttpServer {
 
             // 绑定端口
             ChannelFuture channelFuture = serverBootstrap.bind(8899).sync();
-            long end = System.currentTimeMillis();
-            log.info("server started in {}", (end - start) / 1000 + " seconds");
+            log.info("server started in {}ms", interval.intervalRestart());
 
             channelFuture.channel().closeFuture().sync();
         } finally {
