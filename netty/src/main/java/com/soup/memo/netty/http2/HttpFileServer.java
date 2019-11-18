@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HttpFileServer {
 
-    private static final String DEFAULT_URL = "/src/com/soup/memo/netty/http2/";
+    private static final String DEFAULT_URL = "/netty/";
 
     public static void main(String[] args) throws Exception {
         new HttpFileServer().run(8899, DEFAULT_URL);
@@ -64,7 +64,7 @@ public class HttpFileServer {
                     });
 
             ChannelFuture cf = bootstrap.bind(port).sync();
-            log.info("Http 文件目录服务器启动，网址：http://127.0.0.1:{}{}，启动时间：{}", port, url, interval.intervalRestart());
+            log.info("Http 文件目录服务器启动，网址：http://127.0.0.1:{}{}，启动时间：{}ms", port, url, interval.intervalRestart());
             cf.channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
