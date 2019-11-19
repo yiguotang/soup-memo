@@ -9,6 +9,7 @@ import io.netty.channel.ChannelProgressiveFuture;
 import io.netty.channel.ChannelProgressiveFutureListener;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.DefaultHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpHeaderNames;
@@ -99,7 +100,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
         }
 
         long fileLength = randomAccessFile.length();
-        HttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
+        HttpResponse response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
         HttpUtil.setContentLength(response, fileLength);
         setContentTypeHeader(response, file);
 
@@ -108,14 +109,16 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
         }
         ctx.write(response);
 
-        ChannelFuture sendFileFuture = ctx.write(new ChunkedFile(randomAccessFile, 0, fileLength, 8192), ctx.newProgressivePromise());
+        ChannelFuture sendFileFuture = ctx.write(new ChunkedFile(randomAccessFile, 0, fileLength, 8192),
+                ctx.newProgressivePromise());
         sendFileFuture.addListener(new ChannelProgressiveFutureListener() {
             @Override
             public void operationProgressed(ChannelProgressiveFuture future, long progress, long total) {
+                String fileName = file.getName();
                 if (total < 0) {
-                    log.info("Transfer progress: {}", progress);
+                    log.info("[{}] transfer progress: {}", fileName, progress);
                 } else {
-                    log.info("Transfer progress: {}/{}", progress, total);
+                    log.info("[{}] transfer progress: {}/{}", fileName, progress, total);
                 }
             }
 
@@ -229,7 +232,8 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
      */
     private static void sendError(ChannelHandlerContext ctx, HttpResponseStatus responseStatus) {
         String failureMsg = "Failure: " + responseStatus.toString() + "\r\n";
-        FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, responseStatus, Unpooled.copiedBuffer(failureMsg, CharsetUtil.UTF_8));
+        FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, responseStatus,
+                Unpooled.copiedBuffer(failureMsg, CharsetUtil.UTF_8));
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
         ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
     }
