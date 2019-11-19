@@ -1,4 +1,4 @@
-package com.soup.memo.netty.http2;
+package com.soup.memo.netty.httpfileserver;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
