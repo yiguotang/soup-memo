@@ -1,4 +1,4 @@
-package com.soup.memo.netty.httpfileserver;
+package com.soup.memo.netty.httpfile;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
