@@ -240,6 +240,9 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
 
     private static void setContentTypeHeader(HttpResponse response, File file) {
         MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
-        response.headers().set(HttpHeaderNames.CONTENT_TYPE, mimetypesFileTypeMap.getContentType(file.getPath()));
+        // 下载文件的content-type
+        // response.headers().set(HttpHeaderNames.CONTENT_TYPE, mimetypesFileTypeMap.getContentType(file.getPath()));
+        // 直接打开文件
+        response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
     }
 }
