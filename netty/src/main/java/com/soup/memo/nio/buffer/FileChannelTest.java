@@ -12,6 +12,7 @@ import java.nio.channels.FileChannel;
 /**
  * <p>
  * Description: nio的文件通道用法
+ *    使用FileChannel前必须先打开，通过InputStream、OutputStream、RandomAccessFile来获取一个FileChannel实例
  * </p>
  *
  * @author zhaoyi
