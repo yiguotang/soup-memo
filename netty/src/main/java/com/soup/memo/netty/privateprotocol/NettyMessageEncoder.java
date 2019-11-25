@@ -13,12 +13,12 @@ import java.util.List;
  *
  * @author zhaoyi
  */
-public final class NettyMessageEncode extends MessageToMessageEncoder<NettyMessage> {
+public final class NettyMessageEncoder extends MessageToMessageEncoder<NettyMessage> {
 
-    private MarshallingCodeCFactory marshallingCodeCFactory;
+    private NettyMarshallingEncoder marshallingEncoder;
 
-    public NettyMessageEncode() {
-        this.marshallingCodeCFactory = new MarshallingCodeCFactory();
+    public NettyMessageEncoder() {
+        this.marshallingEncoder = MarshallingCodecFactory.buildMarshallingEncoder();
     }
 
     @Override
@@ -35,16 +35,23 @@ public final class NettyMessageEncode extends MessageToMessageEncoder<NettyMessa
         sendBuf.writeByte(msg.getHeader().getPriority());
         sendBuf.writeInt(msg.getHeader().getAttachment().size());
 
-        String key = null;
-        Object value = null;
         msg.getHeader().getAttachment().forEach((k, v) -> {
             byte[] keyArray = k.getBytes(StandardCharsets.UTF_8);
             sendBuf.writeInt(keyArray.length);
             sendBuf.writeBytes(keyArray);
 
-            marshallingCodeCFactory.encode(v, sendBuf);
+            marshallingEncoder.encode(ctx, v, sendBuf);
         });
 
+        if (null != msg.getBody()) {
+            marshallingEncoder.encode(ctx, msg.getBody(), sendBuf);
+        }
 
+        int readableBytes = sendBuf.readableBytes();
+        // 在第4个字节写入Buffer长度
+        sendBuf.setInt(4, readableBytes);
+
+        // 把message添加到list传递到下一个Handler
+        out.add(sendBuf);
     }
 }
