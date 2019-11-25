@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * <p>
  *  Netty client
+ *     https://blog.csdn.net/ITer_ZC/article/details/39317311
  * </p>
  *
  * @author zhaoyi
