@@ -1,6 +1,7 @@
 package com.soup.memo.common;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 /**
  * Final 变量测试
@@ -11,7 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 public class FinalTest {
     static final int i = 99;
 
-    public static void main(String[] args) {
+    @Test
+    public void testFinal() {
         for (int i = 0; i < 100; i++) {
             log.info("in loop i value: {}", i);
             i++;

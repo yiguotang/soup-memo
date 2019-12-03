@@ -1,6 +1,7 @@
 package com.soup.memo.common;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 
@@ -12,8 +13,8 @@ import java.math.BigDecimal;
 @Slf4j
 public class BigDecimalTest {
 
-    public static void main(String[] args) {
-
+    @Test
+    public void compareToTest() {
         // BigDecimal compareTo 方法结果
         log.info("BigDecimal compareTo result: {}", new BigDecimal("0.1").compareTo(BigDecimal.ZERO));
     }
