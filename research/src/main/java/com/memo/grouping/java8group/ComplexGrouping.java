@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * @since [产品/模块版本] （可选）
  */
 @Slf4j
-public class ComplexGroup {
+public class ComplexGrouping {
 
     public static void main(String[] args) {
         // 初始化排序数据
@@ -40,12 +40,13 @@ public class ComplexGroup {
                 .collect(Collectors.groupingBy(ProductBean::getName))
                 .entrySet()
                 .stream()
-                .map(ComplexGroup::mapToResultSet)
+                .map(ComplexGrouping::mapToResultSet)
                 .collect(Collectors.toList());
         results.forEach(item -> log.info("{}", item));
     }
 
     private static ProductBeanResult mapToResultSet(Map.Entry<String, List<ProductBean>> entry) {
+        log.info("group key: {}", entry.getKey());
         ProductBeanResult result = new ProductBeanResult();
         Double sum = entry.getValue().stream().map(ProductBean::getAmount).reduce(0.0, (temp, e) -> temp + e);
         result.setName(entry.getKey());

@@ -2,8 +2,11 @@ package com.memo.grouping.java8group;
 
 import com.google.common.collect.Lists;
 import com.memo.grouping.entity.ScprsScpOrderItem;
+import jdk.nashorn.internal.runtime.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * 订单分组
@@ -12,16 +15,15 @@ import java.util.List;
  * @see [相关类/方法]（可选）
  * @since [产品/模块版本] （可选）
  */
-public class OrderGroup {
+@Slf4j
+public class OrderGrouping {
 
 
 
     public static void main(String[] args) {
 
         List<ScprsScpOrderItem> orderItems = initData();
-
-
-
+        log.info("init data completed.");
     }
 
     // 按照数量分组
@@ -39,15 +41,27 @@ public class OrderGroup {
         String[] locationCodes = new String[] {"0001", "0003", "0005", "0006"};
         String[] supplierCodes = new String[] {"10000179", "10000179", "10046759", "10000160"};
 
-        for (int i = 0; i < 1000; i++) {
+        Random random = new Random();
+
+        for (int i = 0; i < 200; i++) {
             ScprsScpOrderItem item = new ScprsScpOrderItem();
 
+            int randomInt = random.ints(0,4).findAny().getAsInt();
+            // 设置四要素信息
+            item.setCmmdtyCode(cmmdtyCodes[randomInt]);
+            item.setDepotCode(depotCodes[randomInt]);
+            item.setLocationCode(locationCodes[randomInt]);
+            item.setSupplierCode(supplierCodes[randomInt]);
 
+            item.setBsnMode(randomInt + "");
 
+            item.setBillLimit((randomInt * i) + "");
 
             itmeList.add(item);
         }
 
         return itmeList;
     }
+
+
 }
