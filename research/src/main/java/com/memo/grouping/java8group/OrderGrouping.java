@@ -1,12 +1,16 @@
 package com.memo.grouping.java8group;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.memo.grouping.entity.ScprsScpOrderItem;
 import jdk.nashorn.internal.runtime.logging.Logger;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * 订单分组
@@ -24,11 +28,16 @@ public class OrderGrouping {
 
         List<ScprsScpOrderItem> orderItems = initData();
         log.info("init data completed.");
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        // 分组
+        Map<String, List<ScprsScpOrderItem>> groups = orderItems.stream().collect(Collectors.groupingBy(OrderGrouping::groupByItemNum));
+        log.info("group data completed, time comsume: {}ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
     }
 
     // 按照数量分组
     public static String groupByItemNum(ScprsScpOrderItem item) {
-        return item.getCmmdtyCode();
+        return item.getCmmdtyCode() + "#" + item.getDepotCode() + "#" + item.getLocationCode() + "#" + item.getSupplierCode();
     }
 
     // 初始化数据
