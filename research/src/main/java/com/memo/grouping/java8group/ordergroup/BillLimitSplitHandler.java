@@ -1,8 +1,11 @@
 package com.memo.grouping.java8group.ordergroup;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.memo.grouping.entity.ScprsScpOrderItem;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -45,12 +48,48 @@ public class BillLimitSplitHandler extends AbstractHandler<ScprsScpOrderItem> {
     /**
      * 根据开票限额拆分新订单
      *
-     * @param orderItem 拆分订单依据
+     * @param item 拆分订单依据
      * @return 拆分的新订单对象，如果是null表示不满足拆单业务，不进行拆单
      */
-    private static ScprsScpOrderItem generate(ScprsScpOrderItem orderItem) {
-        // TODO 开票限额拆单逻辑
+    private static ScprsScpOrderItem generate(ScprsScpOrderItem item) {
+        // 供价
+        BigDecimal supplyPrice = parseBigDecimal(item.getSupplyPrice(), null);
+        boolean splitFlag = "0".equals(item.getFreeFlag()) || supplyPrice.compareTo(BigDecimal.ZERO) == 0
+                || !"0".equals(item.getBsnMode());
 
-        return new ScprsScpOrderItem();
+        ScprsScpOrderItem standItem = null;
+        if (!splitFlag) {
+            // TODO 开票限额拆单逻辑
+
+            standItem = new ScprsScpOrderItem();
+            BeanUtil.copyProperties(item, standItem);
+        }
+
+        return standItem;
+    }
+
+    /**
+     *
+     * 功能描述: <br>
+     * 〈String转Bigdecimal〉
+     *
+     * @param numberStr 数字字符串
+     * @param defaultValue 默认值
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    public static BigDecimal parseBigDecimal(String numberStr, BigDecimal defaultValue) {
+        if (StringUtils.isNotEmpty(numberStr)) {
+            if (numberStr.matches("(-)?\\d+(\\.\\d+)?")) {
+                return new BigDecimal(numberStr);
+            } else if (numberStr.contains(",")) {
+                numberStr = numberStr.replace(",", "");
+                if (numberStr.matches("(-)?\\d+(\\.\\d+)?")) {
+                    return new BigDecimal(numberStr);
+                }
+            }
+        }
+        return defaultValue;
     }
 }

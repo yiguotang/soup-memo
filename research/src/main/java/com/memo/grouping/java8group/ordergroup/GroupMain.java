@@ -46,7 +46,7 @@ public class GroupMain {
         // 执行处理
         Stream<ScprsScpOrderItem> afterHandlerData = setupHandler.handler(orderItems.stream());
 
-        // 分组执行链路：按字段分组 -> 按开票额度 -> 按每组数量上限
+        // TODO 分组执行链路：按字段分组 -> 按开票额度 -> 按每组数量上限
 
         // 处理时长
         log.info("group data completed, time comsume: {}ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
