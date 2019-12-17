@@ -1,43 +1,57 @@
-package com.memo.grouping.java8group;
+package com.memo.grouping.java8group.ordergroup;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.memo.grouping.entity.ScprsScpOrderItem;
-import jdk.nashorn.internal.runtime.logging.Logger;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- * 订单分组
+ * 拆单主方法
  *
  * @author 19041060
  * @see [相关类/方法]（可选）
  * @since [产品/模块版本] （可选）
  */
 @Slf4j
-public class OrderGrouping {
-
-
+public class GroupMain {
 
     public static void main(String[] args) {
 
-        List<ScprsScpOrderItem> orderItems = initData();
-        log.info("init data completed.");
+        // 拆单分组
+        spiltGroup();
 
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        // 分组
-        Map<String, List<ScprsScpOrderItem>> groups = orderItems.stream().collect(Collectors.groupingBy(OrderGrouping::groupByItemNum));
-        log.info("group data completed, time comsume: {}ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        // 老拆单分组逻辑
+        SplitGroupOld.splitGroup();
     }
 
-    // 按照数量分组
-    public static String groupByItemNum(ScprsScpOrderItem item) {
-        return item.getCmmdtyCode() + "#" + item.getDepotCode() + "#" + item.getLocationCode() + "#" + item.getSupplierCode();
+    private static void spiltGroup() {
+        // 初始化测试数据
+        List<ScprsScpOrderItem> orderItems = initData();
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
+        // 新建各个执行handler
+        AbstractHandler<ScprsScpOrderItem> setupHandler = new SetupHandler();
+        AbstractHandler<ScprsScpOrderItem> splitHandler = new BillLimitSplitHandler();
+        AbstractHandler<ScprsScpOrderItem> sortHandler = new SortHandler();
+
+        // 拆单分组的执行链路: 分组配置 -> 拆分订单行 -> 排序
+        setupHandler.setNext(splitHandler).setNext(sortHandler);
+
+        // 执行处理
+        Stream<ScprsScpOrderItem> afterHandlerData = setupHandler.handler(orderItems.stream());
+
+        // 分组执行链路：按字段分组 -> 按开票额度 -> 按每组数量上限
+
+        // 处理时长
+        log.info("group data completed, time comsume: {}ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
+
+        log.info("after hander data length: {}", afterHandlerData.count());
     }
 
     // 初始化数据
@@ -71,6 +85,4 @@ public class OrderGrouping {
 
         return itmeList;
     }
-
-
 }
