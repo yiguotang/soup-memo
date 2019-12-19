@@ -1,7 +1,6 @@
 package com.soup.memo.jvm8.memory.gcroot;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
@@ -16,10 +15,9 @@ import org.apache.logging.log4j.Logger;
  * @author zhaoyi
  * @date 2019-03-29 9:12
  */
+@Slf4j
 public class StackFrameLocalParamGcRootTest {
-
-    private static final Logger LOGGER = LogManager.getLogger(StackFrameLocalParamGcRootTest.class);
-
+    
     private int _10MB = 10 * 1024 * 1024;
     private byte[] memory = new byte[8 * _10MB];
 
@@ -27,14 +25,14 @@ public class StackFrameLocalParamGcRootTest {
         StackFrameLocalParamGcRootTest test = new StackFrameLocalParamGcRootTest();
         System.gc();
         // 第一次GC，test为局部变量，引用了new出的对象（80M），作为GC Roots，在Minor GC后被转移到老年代中，且Full GC也不会回收该对象，仍保留在老年代中。
-        LOGGER.info("first gc completely!");
+        log.info("first gc completely!");
     }
 
     public static void main(String[] args) {
         method();
-        LOGGER.info("return main method");
+        log.info("return main method");
         System.gc();
         //  第二次GC，method方法执行完后，局部变量t跟随方法消失，不再有引用类型指向该对象，该对象在Full GC后，被完全回收，老年代腾出该对象之前所占的空间。
-        LOGGER.info("second gc completely!");
+        log.info("second gc completely!");
     }
 }

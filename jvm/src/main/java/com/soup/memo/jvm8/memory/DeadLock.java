@@ -1,16 +1,14 @@
 package com.soup.memo.jvm8.memory;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author zhaoyi
  * @description 死锁示例
  * @date 2019-03-24 21:34
  **/
+@Slf4j
 public class DeadLock {
-
-    private static final Logger LOGGER = LogManager.getLogger(DeadLock.class);
 
     public static void main(String[] args) {
 
@@ -21,41 +19,37 @@ public class DeadLock {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
-            LOGGER.error(e);
+            System.out.println("method invoke occur Exception!");
         }
     }
 }
 
 class A {
 
-    private static final Logger LOGGER = LogManager.getLogger(A.class);
-
     public static synchronized void method() {
 
-        LOGGER.info("method from A");
+        System.out.println("method from class A");
 
         try {
             Thread.sleep(5000);
             B.method();
         } catch (InterruptedException e) {
-            LOGGER.error(e);
+            System.out.println("method invoke from class A occur Exception!");
         }
     }
 }
 
 class B {
 
-    private static final Logger LOGGER = LogManager.getLogger(B.class);
-
     public static synchronized void method() {
 
-        LOGGER.info("method from B");
+        System.out.println("method from class B");
 
         try {
             Thread.sleep(5000);
             A.method();
         } catch (InterruptedException e) {
-            LOGGER.error(e);
+            System.out.println("method invoke from class B occur Exception!");
         }
     }
 }

@@ -1,9 +1,8 @@
 package com.soup.memo.jvm8.memory;
 
+import lombok.extern.slf4j.Slf4j;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * @author zhaoyi
@@ -19,10 +18,8 @@ public class MetaSpaceTest {
     }
 }
 
-
+@Slf4j
 class MethodAreaTest {
-
-    private static final Logger LOGGER = LogManager.getLogger(MetaSpaceTest.class);
 
     /**
      * 使用cglib，创建class，模拟方法区的溢出
@@ -33,7 +30,7 @@ class MethodAreaTest {
             enhancer.setSuperclass(MethodAreaTest.class);
             enhancer.setUseCache(false);
             enhancer.setCallback((MethodInterceptor) (obj, method, args1, proxy) -> proxy.invokeSuper(obj, args1));
-            LOGGER.info("hello world");
+            log.info("hello world");
             enhancer.create();
         }
     }
