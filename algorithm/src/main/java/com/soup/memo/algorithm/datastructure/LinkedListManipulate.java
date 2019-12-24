@@ -43,7 +43,7 @@ public class LinkedListManipulate {
         } else if (index == 0) {
             // 链表非空，向链表头插入数据，将新插入的节点的next指向链表头，再将头赋值为当前节点
             insertNode.next = head;
-            insertNode = head;
+            head = insertNode;
         } else if (size == index) {
             // 链表非空，向链表尾部插入数据，将链表最后一个节点指向新节点，再把尾节点赋值为新节点
             tail.next = insertNode;
@@ -122,10 +122,9 @@ public class LinkedListManipulate {
      * 打印链表所有数据
      */
     public void outPut() {
-        Node tmp = null;
+        Node tmp = head;
         while (null != tmp) {
-            // log.info("{}", tmp.data);
-            System.out.println(tmp.data);
+            log.info("{}", tmp.data);
             tmp = tmp.next;
         }
     }
