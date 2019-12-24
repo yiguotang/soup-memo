@@ -1,7 +1,6 @@
 package com.soup.memo.nio.buffer;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,9 +12,8 @@ import java.nio.channels.FileChannel;
  * @description nio方式读取文件
  * @date 2019-03-31 22:34
  **/
+@Slf4j
 public class ReadFile {
-
-    private static final Logger LOGGER = LogManager.getLogger(ReadFile.class);
 
     public static void main(String[] args) throws IOException {
         FileInputStream fileInputStream = new FileInputStream("build.gradle");
@@ -28,7 +26,7 @@ public class ReadFile {
 
         while (byteBuffer.remaining() > 0) {
             byte b = byteBuffer.get();
-            LOGGER.info("character: {}", b);
+            log.info("character: {}", b);
         }
 
         fileChannel.close();

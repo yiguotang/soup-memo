@@ -1,7 +1,6 @@
 package com.soup.memo.nio.buffer;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,9 +17,8 @@ import java.nio.channels.FileChannel;
  * @author zhaoyi
  * @date 2019-04-01 16:10
  */
+@Slf4j
 public class FileChannelTest {
-
-    private static final Logger LOGGER = LogManager.getLogger(FileChannelTest.class);
 
     public static void main(String[] args) throws Exception {
         FileInputStream inputStream = new FileInputStream("settings.gradle");
@@ -43,7 +41,7 @@ public class FileChannelTest {
             byteBuffer.clear();
 
             int read = inputChannel.read(byteBuffer);
-            LOGGER.info("read: {}", read);
+            log.info("read: {}", read);
             if (-1 == read) {
                 break;
             }
