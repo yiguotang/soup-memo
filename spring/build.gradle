@@ -15,5 +15,6 @@ dependencies {
             'org.springframework:spring-context:5.1.6.RELEASE',
             'org.springframework:spring-beans:5.1.6.RELEASE',
             'org.springframework:spring-tx:5.1.6.RELEASE',
+            'org.springframework:spring-jdbc:5.1.6.RELEASE',
     )
 }
