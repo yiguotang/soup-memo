@@ -58,7 +58,11 @@ subprojects {
                 // other
                 'cn.hutool:hutool-all:5.0.5',
         )
-        testCompile('junit:junit:4.12')
+        testCompile(
+                'junit:junit:4.12',
+                'org.mockito:mockito-all:1.9.5',
+                'org.easymock:easymock:3.2'
+        )
     }
 
     //指定目录结构

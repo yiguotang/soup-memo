@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.soup.memo'
+version '1.0'
+
+description = "distributed-sys，分布式系统相关"
+archivesBaseName = "distributed-sys"
+
+dependencies {
+    compile(
+            // distributed lock: redis version
+            //'top.crossoverjie.opensource:distributed-redis-lock:1.0.0',
+            'redis.clients:jedis:2.9.0'
+    )
+}

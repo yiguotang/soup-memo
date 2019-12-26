@@ -12,5 +12,6 @@ archivesBaseName = "java jvm"
 dependencies {
     compile(
             "cglib:cglib:3.3.0",
+            'mysql:mysql-connector-java:8.0.18'
     )
 }
