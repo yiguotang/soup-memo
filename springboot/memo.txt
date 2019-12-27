@@ -1,0 +1,2 @@
+1. 运行与构建
+    使用的是gradle构建，通过执行gradle tasks
