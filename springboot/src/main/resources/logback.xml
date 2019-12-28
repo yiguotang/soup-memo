@@ -35,6 +35,7 @@
     <!-- 过滤掉spring和mybatis的一些无用的DEBUG信息 -->
     <logger name="org.springframework" level="error" />
     <logger name="org.mybatis" level="error" />
+    <logger name="org.apache.catalina" level="error" />
 
     <!-- 业务相关日志，应在生产环境加上additivity="false" -->
     <logger name="com.soup.springboot" level="info">

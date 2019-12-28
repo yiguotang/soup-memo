@@ -1,2 +1,17 @@
 server:
   port: 9090
+
+spring:
+  application:
+    name: springboot # 服务名，在进行服务注册和服务发现的时候使用这个应用名
+  mandatory-file-encoding: UTF-8
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+
+# 自定义配置
+myConfig:
+  configObj:
+    name: 李四
+    age: 30
