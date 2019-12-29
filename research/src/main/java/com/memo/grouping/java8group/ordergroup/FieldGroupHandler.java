@@ -31,7 +31,7 @@ public class FieldGroupHandler extends AbstractHandler<ScprsScpOrderItem> {
         if (obj instanceof Stream) {
             @SuppressWarnings("unchecked")
             Stream<ScprsScpOrderItem> streamHandler = (Stream<ScprsScpOrderItem>) obj;
-            fieldGroups = streamHandler.collect(Collectors.groupingBy(FieldGroupHandler::groupByField));
+            fieldGroups = streamHandler.collect(Collectors.groupingBy(this::groupByField));
         }
         
         return fieldGroups;
@@ -45,7 +45,7 @@ public class FieldGroupHandler extends AbstractHandler<ScprsScpOrderItem> {
      * @param item 订单行
      * @return 分组key
      */
-    private static String groupByField(ScprsScpOrderItem item) {
+    private String groupByField(ScprsScpOrderItem item) {
 
         List<String> groupKeys = Lists.newArrayList();
 
