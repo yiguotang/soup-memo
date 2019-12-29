@@ -17,3 +17,5 @@ gradle-app.setting
 # JetBrains IntelliJ IDEA
 .idea/
 */out/
+
+rebel.xml

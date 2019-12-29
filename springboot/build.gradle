@@ -14,7 +14,11 @@ archivesBaseName = "springboot"
 
 dependencies {
     compile(
-            'org.springframework.boot:spring-boot-starter-web'
+            'org.springframework.boot:spring-boot-starter-web',
+            
+            // jar包打包的时候，jarbao中的org目录的class文件的依赖，实际生产环境中不需要这个依赖
+            'org.springframework.boot:spring-boot-loader'
+            
     )
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
