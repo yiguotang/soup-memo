@@ -1,11 +1,13 @@
 package com.soup.springboot.config;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
- *  自定义配置对象
+ *  从配置文件中读取配置信息，封装成自定义配置对象
  * </p>
  *
  * @author zhaoyi
@@ -15,10 +17,13 @@ import org.springframework.beans.factory.annotation.Value;
 @Data
 public class MyConfigBean {
 
-    @Value("${myConfig.configObj.name}")
     private String name;
 
-    @Value("${myConfig.configObj.age}")
     private int age;
 
+    private List<String> usedName;
+
+    private Map<String, String> map;
+
+    private List<Map<String, String>> keyVals;
 }

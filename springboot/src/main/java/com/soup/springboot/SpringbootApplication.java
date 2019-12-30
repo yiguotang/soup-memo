@@ -12,6 +12,13 @@ public class SpringbootApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootApplication.class, args);
+
+        // 也可以使用下面的方式进行启动
+        /*SpringApplication application = new SpringApplication(SpringbootApplication.class);
+        // customize application settings here，定制高级配置
+        application.setBannerMode(Banner.Mode.OFF);
+        application.run(args);*/
+
     }
 
 }

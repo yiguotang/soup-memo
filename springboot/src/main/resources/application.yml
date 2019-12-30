@@ -4,14 +4,29 @@ server:
 spring:
   application:
     name: springboot # 服务名，在进行服务注册和服务发现的时候使用这个应用名
+  main:
+    banner-mode: "off" # 关闭启动的banner
   mandatory-file-encoding: UTF-8
   http:
     encoding:
+      force: true
       enabled: true
       charset: UTF-8
 
 # 自定义配置
-myConfig:
-  configObj:
+myconfig:
+  configobj:
     name: 李四
     age: 30
+    used-name: # list
+      - lisi
+      - Li
+      - Bruce·Li
+    map: # 键值对配置
+      home: wuhu
+      city: nanjing
+    key-vals: # 键值对list，一对key、value封装成map对象
+      - key: city
+        value: nanjing
+      - key: city
+        value: nanjing
