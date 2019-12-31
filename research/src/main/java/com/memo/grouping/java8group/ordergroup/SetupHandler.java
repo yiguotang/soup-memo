@@ -27,7 +27,7 @@ public class SetupHandler extends AbstractHandler<ScprsScpOrderItem> {
 
         Stream<ScprsScpOrderItem> handlerStream = null;
         if (null != stream) {
-            handlerStream = stream.map(SetupHandler::setupConfig);
+            handlerStream = stream.map(this::setupConfig);
         }
 
         return handlerStream;
@@ -38,7 +38,7 @@ public class SetupHandler extends AbstractHandler<ScprsScpOrderItem> {
      * @param orderItem 订单行信息
      * @return 设置了分组信息的订单行对象
      */
-    private static ScprsScpOrderItem setupConfig(ScprsScpOrderItem orderItem) {
+    private ScprsScpOrderItem setupConfig(ScprsScpOrderItem orderItem) {
         String buCode = orderItem.getBuCode();
         String supplierCode = orderItem.getSupplierCode();
 

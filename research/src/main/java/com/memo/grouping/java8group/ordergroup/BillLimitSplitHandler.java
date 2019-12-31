@@ -29,7 +29,7 @@ public class BillLimitSplitHandler extends AbstractHandler<ScprsScpOrderItem> {
 
         Stream<ScprsScpOrderItem> handlerStream = null;
         if (null != stream) {
-            handlerStream = stream.flatMap(BillLimitSplitHandler::splitByBillLimit);
+            handlerStream = stream.flatMap(this::splitByBillLimit);
         }
 
         return handlerStream;
@@ -40,9 +40,9 @@ public class BillLimitSplitHandler extends AbstractHandler<ScprsScpOrderItem> {
      *
      * @return 新拆分的订单行对象
      */
-    private static Stream<ScprsScpOrderItem> splitByBillLimit(ScprsScpOrderItem orderItem) {
+    private Stream<ScprsScpOrderItem> splitByBillLimit(ScprsScpOrderItem orderItem) {
         // 根据入参只生成一个新订单行，加上入参对象，stream中最多只有2个元素
-        return Stream.iterate(orderItem, BillLimitSplitHandler::generate).limit(2).filter(Objects::nonNull);
+        return Stream.iterate(orderItem, this::generate).limit(2).filter(Objects::nonNull);
     }
 
     /**
@@ -51,7 +51,7 @@ public class BillLimitSplitHandler extends AbstractHandler<ScprsScpOrderItem> {
      * @param item 拆分订单依据
      * @return 拆分的新订单对象，如果是null表示不满足拆单业务，不进行拆单
      */
-    private static ScprsScpOrderItem generate(ScprsScpOrderItem item) {
+    private ScprsScpOrderItem generate(ScprsScpOrderItem item) {
         // 供价
         BigDecimal supplyPrice = parseBigDecimal(item.getSupplyPrice(), null);
         boolean splitFlag = "0".equals(item.getFreeFlag()) || supplyPrice.compareTo(BigDecimal.ZERO) == 0
@@ -79,7 +79,7 @@ public class BillLimitSplitHandler extends AbstractHandler<ScprsScpOrderItem> {
      * @see [相关类/方法](可选)
      * @since [产品/模块版本](可选)
      */
-    public static BigDecimal parseBigDecimal(String numberStr, BigDecimal defaultValue) {
+    public BigDecimal parseBigDecimal(String numberStr, BigDecimal defaultValue) {
         if (StringUtils.isNotEmpty(numberStr)) {
             if (numberStr.matches("(-)?\\d+(\\.\\d+)?")) {
                 return new BigDecimal(numberStr);

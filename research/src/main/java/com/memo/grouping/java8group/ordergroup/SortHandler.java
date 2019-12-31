@@ -21,10 +21,10 @@ public class SortHandler extends AbstractHandler<ScprsScpOrderItem> {
     @Override
     protected Stream<ScprsScpOrderItem> sort(Stream<ScprsScpOrderItem> stream) {
         log.info("sort orde item");
-        return stream.sorted(SortHandler::compare);
+        return stream.sorted(this::compare);
     }
 
-    private static int compare(ScprsScpOrderItem arg0, ScprsScpOrderItem arg1) {
+    private int compare(ScprsScpOrderItem arg0, ScprsScpOrderItem arg1) {
         int result = 0;
 
         if (!strEquals(arg0.getIsLocation(), arg1.getIsLocation())) {
@@ -86,7 +86,7 @@ public class SortHandler extends AbstractHandler<ScprsScpOrderItem> {
         return result;
     }
 
-    private static boolean strEquals(String str1, String str2) {
+    private boolean strEquals(String str1, String str2) {
         boolean result = false;
         if (str1 == null && str2 == null) {
             result = true;
@@ -97,7 +97,7 @@ public class SortHandler extends AbstractHandler<ScprsScpOrderItem> {
         return result;
     }
 
-    private static int strCompare(String str1, String str2) {
+    private int strCompare(String str1, String str2) {
         int result = 0;
         if (str1 == null) {
             if (str2 != null) {
