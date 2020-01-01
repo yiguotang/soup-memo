@@ -18,8 +18,19 @@ dependencies {
             'org.springframework.boot:spring-boot-configuration-processor',
             
             // jar包打包的时候，jarbao中的org目录的class文件的依赖，实际生产环境中不需要这个依赖
-            'org.springframework.boot:spring-boot-loader'
-            
+            'org.springframework.boot:spring-boot-loader',
+
+            // 添加jsp相关解析依赖
+            'javax.servlet:jstl',
+            'org.apache.tomcat.embed:tomcat-embed-jasper',
+
+            // websocket依赖
+            'org.springframework.boot:spring-boot-starter-websocket',
+            'org.springframework.boot:spring-boot-starter-json',
+
+            // 开发者工具: dev-tools
+            'org.springframework.boot:spring-boot-devtools',
+
     )
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

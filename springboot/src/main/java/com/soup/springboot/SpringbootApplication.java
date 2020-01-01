@@ -1,8 +1,16 @@
 package com.soup.springboot;
 
+import com.soup.springboot.echo.DefaultEchoService;
+import com.soup.springboot.echo.EchoService;
+import com.soup.springboot.echo.EchoWebSocketHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 /**
  * springboot 启动类
@@ -10,7 +18,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @Slf4j
 @SpringBootApplication
-public class SpringbootApplication {
+@EnableWebSocket
+public class SpringbootApplication implements WebSocketConfigurer {
 
     public static void main(String[] args) {
 
@@ -27,4 +36,18 @@ public class SpringbootApplication {
 
     }
 
+    @Bean
+    public EchoService echoService() {
+        return new DefaultEchoService("You said \"%s\"! ");
+    }
+
+    @Bean
+    public WebSocketHandler echoWebSocketHandler() {
+        return new EchoWebSocketHandler(echoService());
+    }
+
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(echoWebSocketHandler(), "/echo").withSockJS();
+    }
 }
