@@ -12,6 +12,10 @@ spring:
       force: true
       enabled: true
       charset: UTF-8
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
 
 # 自定义配置
 myconfig:
