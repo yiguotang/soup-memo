@@ -33,7 +33,7 @@
     </appender>
 
     <!-- 过滤掉spring和mybatis的一些无用的DEBUG信息 -->
-    <logger name="org.springframework" level="error" />
+    <logger name="org.springframework" level="trace" />
     <logger name="org.mybatis" level="error" />
 
     <!-- 业务相关日志，应在生产环境加上additivity="false" -->

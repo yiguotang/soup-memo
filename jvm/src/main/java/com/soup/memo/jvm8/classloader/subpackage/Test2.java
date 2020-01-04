@@ -15,7 +15,7 @@ public class Test2 {
     public static void main(String[] args) throws Exception {
         MyClassLoader classLoader = new MyClassLoader("loader1");
 
-        Class<?> clazz = classLoader.loadClass("com.dev.jvm.classloader.MySample");
+        Class<?> clazz = classLoader.loadClass("com.soup.memo.jvm8.classloader.MySample");
         System.out.println("class: " + clazz.hashCode());
         System.out.println("class loader: " + clazz.getClassLoader());
 
