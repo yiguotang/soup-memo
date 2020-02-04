@@ -12,4 +12,5 @@ include 'research'
 include 'netty-case'
 include 'distributed-sys'
 include 'springboot'
+include 'mq'
 
