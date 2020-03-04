@@ -19,5 +19,11 @@ public class NumberStrCompare {
         BigDecimal d1 = new BigDecimal(str1);
         BigDecimal d2 = new BigDecimal(str2);
         System.out.println(d1.compareTo(d2));
+
+        System.out.println("------------------");
+
+        String num = "0";
+        BigDecimal decimal = new BigDecimal(num);
+        System.out.println(decimal);
     }
 }
