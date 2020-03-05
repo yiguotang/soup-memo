@@ -10,5 +10,7 @@ description = "thread"
 archivesBaseName = "thread"
 
 dependencies {
-
+    compile (
+            'org.openjdk.jol:jol-core:0.10'
+    )
 }
